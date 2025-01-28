@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    .table-custom {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        background-color: #2d2d2d;
+
+    }
+    .table-custom thead th {
+        color: #e0e0e0;
+        background-color: #2d2d2d;
+        border-bottom: 2px solid #404040;
+        font-weight: 600;
+        padding: 1.2rem;
+    }
+
+    .table-custom tbody td {
+        color: #e0e0e0;
+        padding: 1rem;
+        vertical-align: middle;
+        border-color: #404040;
+        background-color: #2d2d2d;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #363636;
+    }
+
+    .table-custom td, .table-custom th {
+        border-top: 1px solid #404040;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        color: #ffffff; /* Белый цвет для заголовка */
+    }
+
+    .header p {
+        font-size: 1.2rem;
+        color: #b0b0b0;
+    }
+
+    .base-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .base {
+        background-color: #2a2a2a;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        max-width: 600px;
+        width: 100%;
+        
+    }
+
+    .base h3 {
+        font-size: 1.5rem;
+        color: #ffffff;
+        margin-bottom: 15px;
+    }
+
+    .base p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #e0e0e0;
+    }
+
+    .base code {
+        background-color: #3a3a3a;
+        color: #f8f8f8;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-family: 'Courier New', monospace;
+    }
+
+    .base pre {
+        background-color: #3a3a3a;
+        padding: 10px;
+        border-radius: 6px;
+        overflow-x: auto;
+    }
+
+    .base a {
+        color: #1df159;
+        text-decoration: none;
+    }
+
+    .base a:hover {
+        text-decoration: underline;
+    }
+
+    
+</style>
+
+{% if user.is_authenticated %}
+    <br/>
+    <table class="table table-striped table-custom table-hover">
+        <thead>
+            <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Почта</th>
+            <th scope="col">Номер</th>
+            <th scope="col">Адрес</th>
+            <th scope="col">Город</th>
+            <th scope="col">Время создания</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if records %}
+                {% for record in records %}
+                    <tr>
+                        <td><a href="{% url 'customer_record' record.id %}">{{ record.id }}</a></td>
+                        <td>{{ record.first_name }}</td>
+                        <td>{{ record.last_name }}</td>
+                        <td>{{ record.email }}</td>
+                        <td>{{ record.phone }}</td>
+                        <td>{{ record.address }}</td>
+                        <td>{{ record.city }}</td>
+                        <td>{{ record.created_at }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+{% else %}
+    <br/>
+    <div class="header">
+        <h1>CRM System</h1>
+        <p>Проект на Django для управления клиентами</p>
+    </div>
+    <div class="base-container">
+    <div class="base">
+        <h3>Технологии:</h3>
+        <p>
+            <code>Django 5.1.5</code> • 
+            <code>Python 3.12</code> • 
+            <code>SQL</code> • 
+            <code>HTML/CSS</code>
+        </p>
+
+        <h3>Запуск проекта:</h3>
+        <pre><code>
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+        </code></pre>
+
+        <p>🔗 Исходный код доступен в <a href="#">репозитории</a></p>
+    </div>
+    </div>
+{% endif %}
+
+{% endblock %}

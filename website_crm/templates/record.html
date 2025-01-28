@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    .card-custom {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        background-color: #2d2d2d;
+        border: 1px solid #404040;
+    }
+
+    .table-custom tbody td {
+        color: #e0e0e0;
+        padding: 1rem;
+        vertical-align: middle;
+        border-color: #404040;
+        background-color: #2d2d2d;
+    }
+
+    .card-custom {
+        border: none;
+    }
+
+    .card-custom .card-header {
+        background-color: #363636;
+        color: #e0e0e0;
+        border-bottom: 1px solid #404040;
+        font-size: 1.25rem;
+        padding: 1rem 1.5rem;
+    }
+
+    .card-custom .card-body {
+        padding: 1.5rem;
+        background-color: #2d2d2d;
+    }
+
+    .card-custom .card-text {
+        color: #e0e0e0;
+        margin-bottom: 0.8rem;
+        font-size: 1rem;
+    }
+
+    .card-custom strong {
+        color: #ffffff;
+        margin-right: 0.5rem;
+    }
+</style>
+<br/>
+<div class="card card-custom">
+    <div class="card-header">
+        <strong>{{ customer_record.first_name }} {{ customer_record.last_name }}</strong>
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+            <strong>ID:</strong>{{ customer_record.id }}
+        </p>
+        <p class="card-text">
+            <strong>Почта:</strong>{{ customer_record.email }}
+        </p>
+        <p class="card-text">
+            <strong>Номер:</strong>{{ customer_record.phone }}
+        </p>
+        <p class="card-text">
+            <strong>Адрес:</strong>{{ customer_record.address }}
+        </p>
+        <p class="card-text">
+            <strong>Город:</strong>{{ customer_record.city }}
+        </p>
+        <p class="card-text">
+            <strong>Время создания:</strong>{{ customer_record.created_at }}
+        </p>
+    </div>
+</div>
+
+<br/><br/>
+<a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+
+<a href="{% url 'delete_record' customer_record.id %}" class="btn btn-danger">Delete</a>
+
+<a href="{% url 'update_record' customer_record.id %}" class="btn btn-secondary">Update Record</a>
+
+{% endblock %}
